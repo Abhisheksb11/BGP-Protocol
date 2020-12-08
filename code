@@ -1,0 +1,84 @@
+[12/5 9:29 AM] ROSHNI MIRANDA - 200913029
+    
+#include <stdio.h>
+#include<ctype.h>
+int main()
+{
+    int a[10][10],b[10],i,j,n;
+    char src;
+    char dest;
+    char input[10][10];
+    printf("Enter the no. of nodes:");
+    scanf("%d",&n);
+    printf("\n Enter the Adjacency matrix \n");
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            scanf("%d",&a[i][j]);
+        }
+    }
+    printf("Input Adjacency Matrix:\n");
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            printf("%d\t",a[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    printf("Enter the source node and destination node(Capital letter): ");
+    scanf("%*c%c%*c%c", &src, &dest);
+
+
+    int s = ((int)(toupper(dest)) - 65);
+    int d =((int)(toupper(src)) - 65);
+    int count =0;
+
+
+
+    for(i=0;i<n;i++)
+    {
+       if(a[d][i] != 0)
+        {
+            count++;
+            int as = 65+i;
+            printf("Neighbor %d : %c\t ",count, as );
+        }
+    }
+ printf("\n Number ofneighbor node : %d \n ",count);
+    for(i=0;i<n;i++)
+        if(a[d][i] != 0)
+        {
+            count++;
+            int as = 65+i;
+            printf("\n Enter distance from source node %c to neighbor %c \n ",src, as);
+            scanf("%d",&b[i]);
+        }
+    for(i=0;i<n;i++)
+        if(a[d][i] != 0)
+        {
+            int as = 65+i;
+            printf("\n Enter path from %c to neighbor %c:  ",dest, as);
+            scanf("%s",&input[i]);
+        }
+        int min = 999;
+        int minIndex= -1;
+    for(i=0;i<n;i++)
+        if(a[d][i] != 0)
+        {
+            int as = 65+i;
+            int value,temp;
+            printf("\n Enter path value from %c:  ", as);
+            scanf("%d",&value);
+            temp = b[i];
+            temp = temp + value;
+            b[i] = temp;
+            if(b[i] < min)
+            {
+                min = b[i];
+                minIndex = i;
+            }
+        }
+    printf("\n Best Path to %c is %s\t \n", dest, input[minIndex]);
+    return 0;
+}
+ 
